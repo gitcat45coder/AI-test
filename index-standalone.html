@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Royal Darbar - Authentic Indian Cuisine</title>
+    <meta name="description" content="Experience the rich, authentic flavors of India.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg-base: #2a0800;
+            /* Deep rich brown/maroon */
+            --card-bg: rgba(45, 10, 5, 0.95);
+            /* Darker reddish brown */
+            --text-primary: #fdf6e3;
+            /* Warm ivory */
+            --text-secondary: #d4b581;
+            /* Muted gold */
+            --accent-gold: #e2b740;
+            /* Royal gold */
+            --accent-hover: #fce38a;
+            --border-color: rgba(226, 183, 64, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image:
+                radial-gradient(circle at top left, rgba(226, 183, 64, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at bottom right, rgba(226, 183, 64, 0.05) 0%, transparent 60%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .menu-container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 4rem 3rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6),
+                inset 0 0 30px rgba(226, 183, 64, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Authentic Indian border accents */
+        .menu-container::before,
+        .menu-container::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: repeating-linear-gradient(45deg,
+                    var(--accent-gold),
+                    var(--accent-gold) 10px,
+                    #8a2c10 10px,
+                    #8a2c10 20px);
+            opacity: 0.8;
+        }
+
+        .menu-container::before {
+            top: 0;
+        }
+
+        .menu-container::after {
+            bottom: 0;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .motif {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            opacity: 0.7;
+        }
+
+        .menu-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 15px rgba(226, 183, 64, 0.3);
+        }
+
+        .menu-header p {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.4s ease;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-hover);
+            border-color: var(--border-color);
+            background: rgba(226, 183, 64, 0.05);
+        }
+
+        .tab-btn.active {
+            color: var(--bg-base);
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            box-shadow: 0 4px 20px rgba(226, 183, 64, 0.4);
+        }
+
+        .menu-content {
+            min-height: 450px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .menu-item {
+            padding: 1.5rem;
+            border: 1px solid transparent;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item:hover {
+            border-color: var(--border-color);
+            transform: translateY(-3px);
+            background: rgba(226, 183, 64, 0.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            gap: 1rem;
+        }
+
+        .item-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .item-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            background: rgba(226, 183, 64, 0.15);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            border: 1px solid rgba(226, 183, 64, 0.3);
+        }
+
+        .item-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.5;
+            font-weight: 300;
+            flex-grow: 1;
+        }
+
+        .add-to-cart-btn {
+            margin-top: 1.5rem;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-base);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+   CART & PAYMENT STYLES
+   ========================================= */
+
+        .cart-toggle-btn {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(226, 183, 64, 0.4);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .cart-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+
+        .cart-icon {
+            font-size: 1.8rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e11d48;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--bg-base);
+        }
+
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--bg-base);
+            border-left: 1px solid var(--border-color);
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.7);
+            z-index: 101;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-header,
+        .cart-footer {
+            padding: 1.5rem;
+            background: var(--card-bg);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-header h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed rgba(226, 183, 64, 0.2);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .cart-item-price {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.25rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent-gold);
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .qty-btn:hover {
+            background: rgba(226, 183, 64, 0.1);
+        }
+
+        .cart-footer {
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 1.25rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-gold);
+            color: var(--bg-base);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Modals */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 150;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(226, 183, 64, 0.05);
+        }
+
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin: 0;
+        }
+
+        .modal-body {
+            padding: 2rem 1.5rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .card-element {
+            background: linear-gradient(135deg, #1f1f1f, #0a0a0a);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(226, 183, 64, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-element::before {
+            content: 'BANK OF INDIA';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: rgba(226, 183, 64, 0.3);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .card-chip {
+            width: 45px;
+            height: 32px;
+            background: linear-gradient(135deg, #e6c875, #b88d28);
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .card-number {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-name {
+            font-family: 'Outfit', sans-serif;
+            color: #aaa;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .input-group input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            color: var(--accent-gold);
+            padding: 0.85rem;
+            border-radius: 6px;
+            font-size: 1.25rem;
+            text-align: center;
+            letter-spacing: 10px;
+            width: 100%;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(226, 183, 64, 0.2);
+        }
+
+        .error-msg {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 1.2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .pay-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-gold);
+            color: var(--bg-base);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .pay-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .success-content {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+            background: var(--accent-gold);
+            color: var(--bg-base);
+            font-size: 3rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 30px rgba(226, 183, 64, 0.4);
+        }
+
+        .success-content h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .success-content p {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container {
+                padding: 3rem 1.5rem;
+            }
+
+            .menu-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .tabs-container {
+                gap: 0.75rem;
+            }
+
+            .tab-btn {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+            }
+
+            .item-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .cart-panel {
+                right: -100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="menu-container">
+        <!-- Main menu elements... -->
+        <div class="pattern-overlay"></div>
+        <header class="menu-header">
+            <div class="motif">✧</div>
+            <h1>The Royal Darbar</h1>
+            <p>Authentic Flavors of India</p>
+            <div class="motif">✧</div>
+        </header>
+
+        <nav id="tabs-container" class="tabs-container" aria-label="Menu categories"></nav>
+        <div id="menu-content" class="menu-content" role="region" aria-live="polite"></div>
+    </main>
+
+    <!-- Floating Cart Button -->
+    <button id="cart-toggle-btn" class="cart-toggle-btn" onclick="toggleCart()" aria-label="Toggle Cart">
+        <span class="cart-icon">🛒</span>
+        <span id="cart-count" class="cart-count">0</span>
+    </button>
+
+    <!-- Cart / Bill Panel -->
+    <div id="cart-panel" class="cart-panel">
+        <div class="cart-header">
+            <h2>Your Royal Bill</h2>
+            <button class="close-btn" onclick="toggleCart()">×</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Items injected here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total Amount:</span>
+                <span id="cart-total-amount">₹0</span>
+            </div>
+            <button id="checkout-btn" class="checkout-btn" onclick="openPaymentModal()" disabled>Proceed to Secure
+                Payment</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="closeModals()"></div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-header">
+            <h2>Secure Payment</h2>
+            <button class="close-btn" onclick="closeModals()">×</button>
+        </div>
+        <div class="modal-body">
+            <p>Total to Pay: <strong id="modal-amount">₹0</strong></p>
+
+            <div class="card-element">
+                <div class="card-chip"></div>
+                <div class="card-number">**** **** **** 4111</div>
+                <div class="card-name">ROYAL GUEST</div>
+            </div>
+
+            <div class="input-group">
+                <label for="pin-input">Enter 4-digit PIN </label>
+                <input type="password" id="pin-input" maxlength="4" placeholder="****" />
+            </div>
+
+            <div id="payment-error" class="error-msg"></div>
+            <button class="pay-btn" onclick="processPayment()">Complete Payment</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Payment Successful!</h2>
+            <p>Your royal feast is being prepared.</p>
+            <button class="pay-btn" onclick="closeModals(); clearCart();">Return to Menu</button>
+        </div>
+    </div>
+
+    <script>
+        const menuData = {
+            starters: {
+                title: "Starters & Chaat",
+                items: [
+                    { id: "s1", name: "Punjabi Samosa", description: "Crispy pastry filled with spiced potatoes and green peas, served with mint and tamarind chutneys.", price: "₹150" },
+                    { id: "s2", name: "Paneer Tikka Zaffrani", description: "Cottage cheese marinated in saffron-infused spiced yogurt and roasted in a traditional clay tandoor.", price: "₹280" },
+                    { id: "s3", name: "Chicken 65", description: "Spicy, deep-fried chicken tossed with fresh curry leaves, mustard seeds, and whole dried chilies.", price: "₹320" },
+                    { id: "s4", name: "Aloo Tikki Chaat", description: "Pan-fried crisp potato patties topped with sweet yogurt, tangy tamarind sauce, and chickpea flour sev.", price: "₹180" }
+                ]
+            },
+            mains: {
+                title: "Main Course",
+                items: [
+                    { id: "m1", name: "Murgh Makhani (Butter Chicken)", description: "Tender tandoori chicken simmered in a velvety, creamy tomato and roasted cashew gravy.", price: "₹450" },
+                    { id: "m2", name: "Palak Paneer", description: "Fresh, soft cottage cheese cubes folded into a vibrantly spiced spinach puree.", price: "₹380" },
+                    { id: "m3", name: "Dal Makhani", description: "Rich black lentils slow-cooked overnight over glowing embers with tomatoes, cream, and ghee.", price: "₹320" },
+                    { id: "m4", name: "Kashmiri Rogan Josh", description: "Fall-apart tender lamb slow-cooked in a classic aromatic gravy of fennel, ginger, and Kashmiri chilies.", price: "₹520" }
+                ]
+            },
+            breads_rice: {
+                title: "Breads & Rice",
+                items: [
+                    { id: "b1", name: "Lehsuni Naan (Garlic)", description: "Traditional teardrop flatbread topped with minced garlic and cilantro, baked fresh in the tandoor.", price: "₹90" },
+                    { id: "b2", name: "Butter Naan", description: "Soft, pillowy tandoor-baked flatbread generously brushed with clarified butter.", price: "₹70" },
+                    { id: "b3", name: "Hyderabadi Chicken Biryani", description: "Aromatic basmati rice dum-cooked with marinated chicken, blooming saffron, and whole royal spices.", price: "₹450" },
+                    { id: "b4", name: "Jeera Rice", description: "Fluffy aged basmati rice tempered with toasted cumin seeds and pure desi ghee.", price: "₹180" }
+                ]
+            },
+            desserts: {
+                title: "Desserts & Drinks",
+                items: [
+                    { id: "d1", name: "Shahi Gulab Jamun", description: "Warm, melt-in-your-mouth milk-solid dumplings soaked in a delicate rose and green cardamom syrup.", price: "₹140" },
+                    { id: "d2", name: "Kesar Rasmalai", description: "Soft cheese discs immersed in thickened, sweetened milk infused with premium Kashmir saffron.", price: "₹180" },
+                    { id: "d3", name: "Alphonso Mango Lassi", description: "A refreshing traditional blend of sweet Alphonso mangoes and creamy churning yogurt.", price: "₹150" },
+                    { id: "d4", name: "Masala Chai", description: "Traditional robust Indian black tea brewed slowly with milk, ginger, and aromatic ground spices.", price: "₹90" }
+                ]
+            }
+        };
+
+        let currentTab = 'starters';
+        let cart = [];
+
+        function renderTabs() {
+            const tabsContainer = document.getElementById('tabs-container');
+            tabsContainer.innerHTML = '';
+
+            for (const [key, category] of Object.entries(menuData)) {
+                const btn = document.createElement('button');
+                btn.className = `tab-btn ${key === currentTab ? 'active' : ''}`;
+                btn.textContent = category.title;
+                btn.setAttribute('aria-selected', key === currentTab);
+                btn.setAttribute('role', 'tab');
+                btn.onclick = () => switchTab(key);
+                tabsContainer.appendChild(btn);
+            }
+        }
+
+        function renderMenu() {
+            const menuContainer = document.getElementById('menu-content');
+
+            // Clear and reset animation to trigger reflow
+            menuContainer.innerHTML = '';
+
+            const category = menuData[currentTab];
+
+            const grid = document.createElement('div');
+            grid.className = 'menu-grid';
+
+            category.items.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'menu-item';
+                // Add a slight stagger to the animation
+                itemDiv.style.animationDelay = `${index * 0.1}s`;
+
+                itemDiv.innerHTML = `
+            <div class="item-header">
+                <span class="item-name">${item.name}</span>
+                <span class="item-price">${item.price}</span>
+            </div>
+            <p class="item-description">${item.description}</p>
+            <button class="add-to-cart-btn" onclick="addToCart('${item.id}', '${item.name.replace(/'/g, "\\'")}', '${item.price}')">Add to Bill</button>
+        `;
+
+                grid.appendChild(itemDiv);
+            });
+
+            menuContainer.appendChild(grid);
+        }
+
+        function switchTab(tabId) {
+            if (currentTab === tabId) return;
+            currentTab = tabId;
+            renderTabs();
+            renderMenu();
+        }
+
+        // ==========================================
+        // CART & BILLING LOGIC
+        // ==========================================
+
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('open');
+        }
+
+        function addToCart(id, name, priceStr) {
+            const price = parseInt(priceStr.replace('₹', ''));
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+
+            // Animate the cart button slightly to indicate action
+            const cartBtn = document.getElementById('cart-toggle-btn');
+            cartBtn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartBtn.style.transform = '';
+            }, 200);
+
+            updateCartUI();
+        }
+
+        function updateQuantity(id, delta) {
+            const item = cart.find(item => item.id === id);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotalAmount = document.getElementById('cart-total-amount');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            // Subtotal and GST calculation (5% typical for restaurants)
+            const gst = Math.round(totalPrice * 0.05);
+            const grandTotal = totalPrice + gst;
+
+            cartCount.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="color: var(--text-secondary); text-align: center; padding-top: 2rem; font-style: italic;">No items added to the royal bill.</p>';
+                cartTotalAmount.textContent = '₹0';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            cartItems.innerHTML = '';
+
+            cart.forEach(item => {
+                cartItems.innerHTML += `
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">₹${item.price} each</div>
+                </div>
+                <div class="cart-item-controls">
+                    <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)" aria-label="Decrease quantity">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)" aria-label="Increase quantity">+</button>
+                </div>
+            </div>
+        `;
+            });
+
+            // Add tax row dynamically
+            cartItems.innerHTML += `
+        <div style="margin-top: 1.5rem; border-top: 1px dashed rgba(226, 183, 64, 0.3); padding-top: 1rem; text-align: right; color: var(--text-secondary);">
+            <div style="margin-bottom: 0.5rem;">Subtotal: ₹${totalPrice}</div>
+            <div style="margin-bottom: 0.5rem;">GST (5%): ₹${gst}</div>
+        </div>
+    `;
+
+            cartTotalAmount.textContent = `₹${grandTotal}`;
+            document.getElementById('modal-amount').textContent = `₹${grandTotal}`;
+        }
+
+        // ==========================================
+        // PAYMENT LOGIC (Dummy Gateway)
+        // ==========================================
+
+        function openPaymentModal() {
+            toggleCart(); // Close cart
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('payment-modal').classList.add('active');
+            document.getElementById('pin-input').value = '';
+            document.getElementById('payment-error').textContent = '';
+            document.getElementById('pin-input').focus();
+        }
+
+        function closeModals() {
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('payment-modal').classList.remove('active');
+            document.getElementById('success-modal').classList.remove('active');
+        }
+
+        function processPayment() {
+            const pin = document.getElementById('pin-input').value;
+            const errorMsg = document.getElementById('payment-error');
+
+            if (pin === '1263') {
+                errorMsg.textContent = '';
+
+                // Ensure success modal isn't instantly cleared
+                const payBtn = document.querySelector('#payment-modal .pay-btn');
+                payBtn.textContent = 'Processing...';
+
+                setTimeout(() => {
+                    // Close payment modal and open success modal
+                    payBtn.textContent = 'Complete Payment';
+                    document.getElementById('payment-modal').classList.remove('active');
+                    document.getElementById('success-modal').classList.add('active');
+                }, 800);
+
+            } else {
+                errorMsg.textContent = 'Incorrect PIN. Please try again.';
+            }
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        // Initialize when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up ARIA roles for accessibility
+            const tabsContainer = document.getElementById('tabs-container');
+            tabsContainer.setAttribute('role', 'tablist');
+
+            renderTabs();
+            renderMenu();
+            updateCartUI(); // Initialize empty cart state
+        });
+    </script>
+</body>
+
+</html>
